@@ -66,6 +66,12 @@
       <version>4.0.1</version>
       <scope>provided</scope>
     </dependency>
+
+    <dependency>
+      <groupId>org.hibernate.validator</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>6.1.6.Final</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -98,7 +104,8 @@
           <version>3.3.2</version>
           <configuration>
 <!--            <outputDirectory>C:\Users\rebee\Desktop\apache-tomcat-9.0.68\webapps</outputDirectory>-->
-            <outputDirectory>/home/saeed/Документы/apache-tomcat-9.0.68/webapps</outputDirectory>
+<!--            <outputDirectory>/home/saeed/Документы/apache-tomcat-9.0.68/webapps</outputDirectory>-->
+            <outputDirectory>C:\Users\USER\java\apache-tomcat-9.0.68\webapps</outputDirectory>
           </configuration>
         </plugin>
         <plugin>
