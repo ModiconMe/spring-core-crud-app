@@ -1,0 +1,6 @@
+CREATE TABLE person (
+id SERIAL PRIMARY KEY,
+name VARCHAR(30),
+surname VARCHAR(30),
+email VARCHAR(100),
+age INT)
