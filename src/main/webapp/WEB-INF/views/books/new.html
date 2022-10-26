@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>New book</title>
+</head>
+<body>
+
+    <form th:method="POST" th:action="@{/books}" th:object="${book}">
+        <div>
+            <label for="label">Label</label>
+            <input type="text" th:field="*{label}" id="label">
+            <div style="color:red" th:if="${#fields.hasErrors('label')}" th:errors="*{label}">Label error</div>
+            <br>
+            <label for="author">Author</label>
+            <input type="text" th:field="*{author}" id="author">
+            <div style="color:red" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Author error</div>
+            <br>
+            <label for="releaseDate">Date of release</label>
+            <input type="text" th:field="*{releaseDate}" id="releaseDate">
+            <div style="color:red" th:if="${#fields.hasErrors('releaseDate')}" th:errors="*{releaseDate}">Date error</div>
+            <br>
+            <input type="submit" value="Create!">
+        </div>
+    </form>
+</body>
+</html>

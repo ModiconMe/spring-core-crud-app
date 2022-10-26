@@ -1,4 +1,4 @@
-package edu.popov.config;
+package edu.bible.config;
 
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;

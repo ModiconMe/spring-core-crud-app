@@ -4,7 +4,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>edu.popov</groupId>
+  <groupId>edu.bible</groupId>
   <artifactId>crud-app</artifactId>
   <version>1.0</version>
   <packaging>war</packaging>
@@ -84,6 +84,12 @@
       <artifactId>postgresql</artifactId>
       <version>42.5.0</version>
     </dependency>
+
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.17</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -115,8 +121,8 @@
           <artifactId>maven-war-plugin</artifactId>
           <version>3.3.2</version>
           <configuration>
-<!--            <outputDirectory>C:\Users\rebee\Desktop\apache-tomcat-9.0.68\webapps</outputDirectory>-->
-            <outputDirectory>/home/saeed/java/apache-tomcat-9.0.68/webapps</outputDirectory>
+            <outputDirectory>C:\Users\rebee\Desktop\apache-tomcat-9.0.68\webapps</outputDirectory>
+<!--            <outputDirectory>/home/saeed/java/apache-tomcat-9.0.68/webapps</outputDirectory>-->
 <!--            <outputDirectory>C:\Users\USER\java\apache-tomcat-9.0.68\webapps</outputDirectory>-->
           </configuration>
         </plugin>
