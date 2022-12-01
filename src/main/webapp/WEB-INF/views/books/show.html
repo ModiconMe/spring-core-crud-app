@@ -12,8 +12,8 @@
 
 <a th:href="@{/books/{id}/edit(id=${book.getId()})}">Edit</a>
 
-<div th:switch="${book.getPerson_id()}">
-    <form th:case="0" th:method="PATCH" th:action="@{/books/{id}/get-book(id=${book.getId()})}">
+<div th:switch="${book.getPerson()}">
+    <form th:case="null" th:method="PATCH" th:action="@{/books/{id}/get-book(id=${book.getId()})}">
         <label>Choose person</label>
         <select th:object="${person}" th:field="*{id}" id="person">
             <option th:each="person : ${people}" th:value="${person.getId()}" th:text="${person.getName()}"></option>

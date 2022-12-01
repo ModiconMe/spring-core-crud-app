@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Search Book</title>
+</head>
+<body>
+
+<form th:action="@{/books/search}">
+  <label for="label">Enter label of book: </label>
+  <input type="text" th:name="search" id="label"/>
+  <input type="submit" value="Search!"/>
+</form>
+
+<div th:each="book : ${books}">
+  <p th:text="${book.getLabel() + ', ' + book.getAuthor() + ', ' + book.getReleaseDate()}">book</p>
+  <div th:switch="${book.getPerson()}">
+    <p th:case="null" th:text="${'Book is free! You can get it.'}">owner</p>
+    <p th:case="*" th:text="${'Owner: ' + book.getPerson().getName()}">owner</p>
+  </div>
+  <hr/>
+</div>
+</body>
+</html>

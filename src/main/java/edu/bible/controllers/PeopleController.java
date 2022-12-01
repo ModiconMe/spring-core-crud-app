@@ -1,7 +1,7 @@
 package edu.bible.controllers;
 
-import edu.bible.dao.PersonDAO;
 import edu.bible.models.Person;
+import edu.bible.services.PersonServiceImpl;
 import edu.bible.util.PersonValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,62 +16,95 @@ import java.util.Optional;
 @RequestMapping("/people")
 public class PeopleController {
 
-    private final PersonDAO personDAO;
+    private final PersonServiceImpl personService;
     private final PersonValidator personValidator;
 
     @Autowired
-    public PeopleController(PersonDAO personDAO, PersonValidator personValidator) {
-        this.personDAO = personDAO;
+    public PeopleController(PersonServiceImpl personService, PersonValidator personValidator) {
+        this.personService = personService;
         this.personValidator = personValidator;
     }
 
+    /**
+     * Show all persons
+     * @param model
+     */
     @GetMapping("")
     public String index(Model model) {
-        model.addAttribute("people", personDAO.index());
+        model.addAttribute("people", personService.findAll());
         return "people/index";
     }
 
+    /**
+     * Show person and his books
+     * @param id
+     * @param model
+     */
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
-        Optional<Person> person = personDAO.selectPersonById(id);
+        Optional<Person> person = personService.findById(id);
         person.ifPresent(value -> model.addAttribute("person", value));
-        model.addAttribute("books", personDAO.showBooks(id));
+        model.addAttribute("books", personService.findBooks(id));
         return "people/show";
     }
 
+    /**
+     * @param person
+     * @return create person page
+     */
     @GetMapping("/new")
     public String newPerson(@ModelAttribute("person") Person person) {
         return "people/new";
     }
 
+    /**
+     * Create new person
+     * @param person
+     * @param bindingResult
+     */
     @PostMapping
     public String create(@ModelAttribute("person") @Valid Person person,
                          BindingResult bindingResult) {
         personValidator.validate(person, bindingResult);
         if(bindingResult.hasErrors()) return "people/new";
-        personDAO.save(person);
+        personService.save(person);
         return "redirect:/people";
     }
 
+    /**
+     * @param id
+     * @param model
+     * @return person edit page
+     */
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable("id") int id, Model model) {
-        Optional<Person> person = personDAO.selectPersonById(id);
+        Optional<Person> person = personService.findById(id);
         person.ifPresent(value -> model.addAttribute("person", value));
         return "people/edit";
     }
 
+    /**
+     * edit person
+     * @param person
+     * @param bindingResult
+     * @param id
+     */
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("person") @Valid Person person,
                          BindingResult bindingResult, @PathVariable("id") int id) {
         personValidator.validate(person, bindingResult);
         if(bindingResult.hasErrors()) return "people/edit";
-        personDAO.update(id, person);
+        personService.update(id, person);
         return "redirect:/people";
     }
 
+    /**
+     * delete person by id
+     * @param id
+     */
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) {
-        personDAO.delete(id);
+        personService.deleteById(id);
         return "redirect:/people";
     }
 

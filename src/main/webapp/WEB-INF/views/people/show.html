@@ -17,11 +17,10 @@
         <b>Books:</b>
         <br/>
         <table th:each="book : ${books}">
-            <tr th:text="${book.getLabel()}">book<tr/>
+            <div th:style="${book.isOverdue()} ? 'color:red' : 'color:black'" th:text="${book.getLabel()}">text</div>
         </table>
     </div>
     <hr/>
-
     <form th:method="GET" th:action="@{/people/{id}/edit(id=${person.getId()})}">
         <input type="submit" value="Edit">
     </form>

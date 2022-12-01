@@ -1,21 +1,46 @@
 package edu.bible.models;
 
-import javax.validation.constraints.Min;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
+@Entity
+@Table(name = "book")
 public class Book {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
+
     @NotEmpty(message = "label should not be empty")
     @Size(min = 2, max = 30, message = "Label length should be between 2 and 30 characters")
+    @Column(name = "label")
     private String label;
+
     @NotEmpty(message = "Author should not be empty")
     @Size(min = 2, max = 30, message = "Author length should be between 2 and 30 characters")
+    @Column(name = "author")
     private String author;
-    @Min(value = 1500, message = "Release date should be upper than 1500")
-    private int releaseDate;
-    private int person_id;
+
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @Column(name = "release_date")
+    private Date releaseDate;
+
+    @ManyToOne
+    @JoinColumn(name = "person_id", referencedColumnName = "id")
+    private Person person;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "assign_date")
+    private Date assignDate;
+
+    @Transient
+    private boolean overdue;
 
     public Book() {
     }
@@ -44,19 +69,35 @@ public class Book {
         this.author = author;
     }
 
-    public int getReleaseDate() {
+    public Date getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(int releaseDate) {
+    public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
     }
 
-    public int getPerson_id() {
-        return person_id;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setPerson_id(int person_id) {
-        this.person_id = person_id;
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public Date getAssignDate() {
+        return assignDate;
+    }
+
+    public void setAssignDate(Date assignDate) {
+        this.assignDate = assignDate;
+    }
+
+    public boolean isOverdue() {
+        return overdue;
+    }
+
+    public void setOverdue(boolean overdue) {
+        this.overdue = overdue;
     }
 }
