@@ -22,14 +22,6 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
-      <version>5.9.1</version>
-      <scope>test</scope>
-    </dependency>
-
-
-    <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
       <version>${spring.version}</version>
@@ -125,9 +117,7 @@
           <artifactId>maven-war-plugin</artifactId>
           <version>3.3.2</version>
           <configuration>
-<!--            <outputDirectory>C:\Users\rebee\Desktop\apache-tomcat-9.0.68\webapps</outputDirectory>-->
             <outputDirectory>/home/saeed/java/apache-tomcat-9.0.68/webapps</outputDirectory>
-<!--            <outputDirectory>C:\Users\USER\java\apache-tomcat-9.0.68\webapps</outputDirectory>-->
           </configuration>
         </plugin>
         <plugin>
